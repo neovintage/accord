@@ -35,16 +35,3 @@ describe Valcro, "validators" do
     (model.valid?).should be_true
   end
 end
-
-describe Valcro, ".validate" do
-  it "sets validations on the included class" do
-    model = InlineValidatorModel.new
-    model.works = false
-    model.validate
-    model.valid?.should be_false
-
-    model.works = true
-    model.validate
-    model.valid?.should be_true
-  end
-end

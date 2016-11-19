@@ -24,17 +24,3 @@ class StatusModel
     @status ||= "fail"
   end
 end
-
-class InlineValidatorModel
-  include Valcro
-  property works
-
-  def initialize
-    @works = false
-  end
-
-  validate do
-    puts "blah"
-    # errors.add(:works, "does not work") unless works
-  end
-end

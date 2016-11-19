@@ -16,16 +16,8 @@ module Valcro
   def validate
     errors.clear!
     self.class.validators.each do |validator_class|
-      klass = validator_class.new(self)
-      klass.call(errors)
+      validator_class.new(self).call(errors)
     end
-    self.class.validation_blocks.each do |validation_block|
-      run_proc &validation_block
-    end
-  end
-
-  def run_proc
-    with self yield
   end
 
   module ClassMethods
@@ -34,20 +26,12 @@ module Valcro
       @@validation_blocks = [] of Proc(Nil)
     end
 
-    def validates_with(validator_class)
-      validators << validator_class
+    def validates_with(validator_class : Valcro::Validator.class)
+      validators.push(validator_class)
     end
 
     def validators
       @@validators
-    end
-
-    def validation_blocks
-      @@validation_blocks
-    end
-
-    def validate(&block : Proc(Void))
-      @@validation_blocks << block
     end
   end
 end
