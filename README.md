@@ -79,7 +79,17 @@ class Cat
 end
 ```
 
-One of the benefi
+In cases where you need to be more explicit when sharing validator objects, specifying a union type to the constructor may be necessary.
+Here's a partial example:
+
+```crystal
+alias AnimalValidationTypes = (Dog | Cat)
+
+class NameValidator < Accord::Validator
+  def initialize(context : AnimalValidationTypes)
+  end
+end
+```
 
 ### Mixing Validations
 
@@ -100,6 +110,20 @@ end
 
 In this example, `NameValidator` would be executed first, then `AgeValidator` and finally the `validate` method.
 
+### Adding Errors
+
+The `ErrorList` instance acts allows you to add new errors directly with the `add` instance method. When specifying the 
+the name of the object it must be a symbol and when that error is turned into a string, the message is appended to the 
+name of the symbol.
+
+If you don't want the error message to prepend the symbol, a special symbol identifier exists called `:base`.
+
+```crystal
+errors = Accord::ErrorList.new
+errors.add(:base, "I like writing my own error msgs")
+errors.add(:name, "must be awesome")
+errors.full_messages # ["I like writing my own error msgs", "name must be awesome"]
+```
 
 ## Contributing
 
