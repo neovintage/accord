@@ -36,9 +36,11 @@ end
 
 dog = Dog.new
 dog.name = "chuck"
+dog.validate!
 dog.valid?  # false
 dog.error_messages # ["name must be tough"]
 dog.name = "spike"
+dog.validate!
 dog.valid?  # true
 ```
 
