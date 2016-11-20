@@ -77,10 +77,27 @@ class Cat
 end
 ```
 
+One of the benefi
+
 ### Mixing Validations
 
 Accord can mix inline and sharable validations. In terms of the order of operations, sharable validations occur first and then inline 
-validations. 
+validations. The sharable validations are executed in the order that they're defined within the Array passed to `validates_with`.
+
+```crystal
+class Dog
+  include Accord
+
+  validates_with [ NameValidator, AgeValidator ]
+
+  def validate
+    errors.add(:base, "Shouldn't be barking") if night == true && barking == true
+  end
+end
+```
+
+In this example, `NameValidator` would be executed first, then `AgeValidator` and finally the `validate` method.
+
 
 ## Contributing
 
