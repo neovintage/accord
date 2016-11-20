@@ -1,8 +1,14 @@
 require "./valcro/*"
 
 module Valcro
-  macro included
-    extend ClassMethods
+  def validate!
+    errors.clear!
+    if self.responds_to?(:validate_global)
+      self.validate_global
+    end
+    if self.responds_to?(:validate)
+      self.validate
+    end
   end
 
   def errors
@@ -13,25 +19,12 @@ module Valcro
     !errors.any?
   end
 
-  def validate
-    errors.clear!
-    self.class.validators.each do |validator_class|
-      validator_class.new(self).call(errors)
-    end
-  end
-
-  module ClassMethods
-    macro extended
-      @@validators = [] of Valcro::Validator.class
-      @@validation_blocks = [] of Proc(Nil)
-    end
-
-    def validates_with(validator_class : Valcro::Validator.class)
-      validators.push(validator_class)
-    end
-
-    def validators
-      @@validators
+  macro validates_with(validator_array)
+    @@validators = {{ validator_array }}
+    protected def validate_global
+      @@validators.each do |v|
+        v.new(self).call(errors)
+      end
     end
   end
 end

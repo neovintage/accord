@@ -6,7 +6,7 @@ module Valcro
     end
 
     def any?
-      @errors.any?
+      !@errors.empty?
     end
 
     def add(prop : Symbol, message : String)
@@ -19,6 +19,12 @@ module Valcro
 
     def clear!
       @errors = [] of Valcro::Error
+    end
+
+    def full_messages
+      @errors.map do |err|
+        err.to_s
+      end
     end
   end
 end
