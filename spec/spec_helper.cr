@@ -1,13 +1,13 @@
 require "spec"
-require "../src/valcro"
+require "../src/accord"
 
 class TestClass
-  include Valcro
+  include Accord
 end
 
 alias StatusFailValidatorTypes = StatusModel | MultipleValidatorModel
 
-class StatusFailValidator < Valcro::Validator
+class StatusFailValidator < Accord::Validator
   def initialize(context : StatusFailValidatorTypes)
     @context = context
   end
@@ -18,7 +18,7 @@ class StatusFailValidator < Valcro::Validator
 end
 
 class StatusModel
-  include Valcro
+  include Accord
   property status
 
   @status = "fail"
@@ -30,7 +30,7 @@ class StatusModel
 end
 
 class MultipleValidatorModel
-  include Valcro
+  include Accord
   property works, status
 
   @works = true
@@ -46,7 +46,7 @@ class MultipleValidatorModel
 end
 
 class InlineOnlyValidatorModel
-  include Valcro
+  include Accord
   property awesome
   @awesome = "yes"
 

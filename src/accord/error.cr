@@ -1,4 +1,4 @@
-module Valcro
+module Accord
   class Error
     property attr, message
 

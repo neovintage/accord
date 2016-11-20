@@ -1,6 +1,6 @@
-require "./valcro/*"
+require "./accord/*"
 
-module Valcro
+module Accord
   def validate!
     errors.clear!
     if self.responds_to?(:validate_global)
@@ -12,7 +12,7 @@ module Valcro
   end
 
   def errors
-    @errors ||= Valcro::ErrorList.new
+    @errors ||= Accord::ErrorList.new
   end
 
   def valid?

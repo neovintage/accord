@@ -1,8 +1,8 @@
-module Valcro
+module Accord
   class ErrorList
 
     def initialize
-      @errors = [] of Valcro::Error
+      @errors = [] of Accord::Error
     end
 
     def any?
@@ -10,7 +10,7 @@ module Valcro
     end
 
     def add(prop : Symbol, message : String)
-      @errors << Valcro::Error.new(prop, message)
+      @errors << Accord::Error.new(prop, message)
     end
 
     def [](prop)
@@ -18,7 +18,7 @@ module Valcro
     end
 
     def clear!
-      @errors = [] of Valcro::Error
+      @errors = [] of Accord::Error
     end
 
     def full_messages

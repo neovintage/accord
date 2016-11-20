@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Valcro do
+describe Accord do
   it "is valid when no validations are defined" do
     test = TestClass.new
     (test.valid?).should eq(true)
@@ -8,7 +8,7 @@ describe Valcro do
   end
 end
 
-describe Valcro, "adding some errors" do
+describe Accord, "adding some errors" do
   it "give access to the error list" do
     test = TestClass.new
     test.errors.add(:blah, "blah blah")
@@ -18,7 +18,7 @@ describe Valcro, "adding some errors" do
   end
 end
 
-describe Valcro, "validators" do
+describe Accord, "validators" do
   it "can be added" do
     model = StatusModel.new
     model.validate!
