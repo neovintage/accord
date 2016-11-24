@@ -2,7 +2,7 @@ module Accord
   class ErrorList
 
     def initialize
-      @errors = [] of Accord::Error
+      @errors = Array(Accord::Error).new(5)
     end
 
     def any?
@@ -22,7 +22,7 @@ module Accord
     end
 
     def clear!
-      @errors = [] of Accord::Error
+      @errors.clear
     end
 
     def full_messages
