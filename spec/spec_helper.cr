@@ -29,15 +29,26 @@ class StatusModel
 
 end
 
+class NameValidator < Accord::Validator
+  def initialize(context : MultipleValidatorModel)
+    @context = context
+  end
+
+  def call(errors)
+    errors.add(:name, "cannot be blank") if @context.name == "" || @context.name.nil?
+  end
+end
+
 class MultipleValidatorModel
   include Accord
-  property works, status
+  property works, status, name
 
   @works = true
   @status = "fail"
+  @name = ""
 
   validates_with [
-    StatusFailValidator
+    StatusFailValidator, NameValidator
   ]
 
   def validate

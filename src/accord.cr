@@ -20,11 +20,20 @@ module Accord
   end
 
   macro validates_with(validator_array)
-    @@validators = {{ validator_array }}
-    protected def validate_global
-      @@validators.each do |v|
-        v.new(self).call(errors)
-      end
+    @@validators = {
+      {% for validator in validator_array %}
+        {{ validator }},
+      {% end %}
+    }
+
+    def self.validators
+      @@validators
+    end
+
+    def validate_global
+      {% for validator in validator_array %}
+        {{ validator }}.new(self).call(errors)
+      {% end %}
     end
   end
 end

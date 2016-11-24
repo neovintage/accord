@@ -41,6 +41,7 @@ describe Accord, "validators" do
     (model.valid?).should be_false
 
     model.status = "win"
+    model.name = "dude"
     model.validate!
     (model.valid?).should be_true
 
@@ -57,5 +58,28 @@ describe Accord, "validators" do
     model.awesome = "no"
     model.validate!
     (model.valid?).should be_false
+  end
+
+  it "reports back" do
+    model = InlineOnlyValidatorModel.new
+    model.class.responds_to?(:validators).should be_false
+
+    model = MultipleValidatorModel.new
+    model.class.validators.should eq({ StatusFailValidator, NameValidator })
+  end
+end
+
+describe Accord, "multiple error lists" do
+  it "can add them together" do
+    list_a = Accord::ErrorList.new
+    list_a.add(Accord::Error.new(:name, "is blank"))
+
+    list_b = Accord::ErrorList.new
+    list_b.add(Accord::Error.new(:birthday, "doesnt exist"))
+
+    list_c = list_a + list_b
+    list_a.size.should eq(1)
+    list_b.size.should eq(1)
+    list_c.size.should eq(2)
   end
 end
