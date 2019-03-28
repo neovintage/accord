@@ -1,6 +1,6 @@
 # Accord
 
-[![Build Status](https://travis-ci.org/neovintage/accord.svg?branch=master)](https://travis-ci.org/neovintage/accord) [![docrystal.org](http://www.docrystal.org/badge.svg?style=round)](http://www.docrystal.org/github.com/neovintage/accord)
+[![Build Status](https://travis-ci.org/neovintage/accord.svg?branch=master)](https://travis-ci.org/neovintage/accord)
 
 A validation library for Crystal Objects which takes its inspiration from [Valcro](https://github.com/hgmnz/valcro), a simple validation library for Ruby. There are some differences between the Crystal version and Ruby that you'll need to pay attention to.
 
@@ -18,8 +18,8 @@ dependencies:
 
 ## Usage
 
-Validations can be defined within the object that needs to be validated or as separate classes. When using the inline method of validation, 
-an instance method of `validate` needs to be defined. This allows crystal to access all of the instance variables that exist as part of the 
+Validations can be defined within the object that needs to be validated or as separate classes. When using the inline method of validation,
+an instance method of `validate` needs to be defined. This allows crystal to access all of the instance variables that exist as part of the
 instantiated object.
 
 
@@ -48,7 +48,7 @@ dog.valid?  # true
 
 ### Sharing Validations
 
-One of the big values for this library is the ability to share validations across objects. When creating a validation as an object, 
+One of the big values for this library is the ability to share validations across objects. When creating a validation as an object,
 the validator object must:
 
 *  Accept the object to be validated as a parameter to the constructor
@@ -95,7 +95,7 @@ end
 
 ### Mixing Validations
 
-Accord can mix inline and sharable validations. In terms of the order of operations, sharable validations occur first and then inline 
+Accord can mix inline and sharable validations. In terms of the order of operations, sharable validations occur first and then inline
 validations. The sharable validations are executed in the order that they're defined within the Array passed to `validates_with`.
 
 ```crystal
@@ -114,8 +114,8 @@ In this example, `NameValidator` would be executed first, then `AgeValidator` an
 
 ### Adding Errors
 
-The `ErrorList` instance acts allows you to add new errors directly with the `add` instance method. When specifying the 
-the name of the object it must be a symbol and when that error is turned into a string, the message is appended to the 
+The `ErrorList` instance acts allows you to add new errors directly with the `add` instance method. When specifying the
+the name of the object it must be a symbol and when that error is turned into a string, the message is appended to the
 name of the symbol.
 
 If you don't want the error message to prepend the symbol, a special symbol identifier exists called `:base`.
