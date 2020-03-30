@@ -1,4 +1,0 @@
-language: crystal
-notifications: 
-  email: false
-sudo: false

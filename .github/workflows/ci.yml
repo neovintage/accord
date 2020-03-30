@@ -1,0 +1,22 @@
+name: CI
+on:
+  schedule:
+  - cron: '0 10 1 * *'
+  push:
+  pull_request:
+jobs:
+  spec:
+    name: Spec
+    runs-on: ubuntu-latest
+
+    container:
+      image: crystallang/crystal:latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Crystal Version
+      run: |
+        crystal --version
+    - name: Run Accord Specs
+      run: |
+        crystal spec
