@@ -1,7 +1,5 @@
 # Accord
 
-[![Build Status](https://travis-ci.org/neovintage/accord.svg?branch=master)](https://travis-ci.org/neovintage/accord)
-
 A validation library for Crystal Objects which takes its inspiration from [Valcro](https://github.com/hgmnz/valcro), a simple validation library for Ruby. There are some differences between the Crystal version and Ruby that you'll need to pay attention to.
 
 ## Installation
